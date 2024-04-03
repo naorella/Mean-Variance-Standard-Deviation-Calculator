@@ -3,13 +3,12 @@
 
 #imort required libraries
 import numpy as np
-#for testing purposes
 
 #Calculate(lon): produces the mean, variance, standard deviation, max, min,
 #   and sum of the rows, columns, and elements in a 3 x 3 matrix
 #Calculate(): List of Num -> Dictionary of 6 string:(List of Num) pairs
 #Requires: Length of lon must be exactly 9
-def Calculate(lon):
+def calculate(lon):
 
     #Variables for matrix dimensions
     matrix_rows = 3
@@ -17,15 +16,8 @@ def Calculate(lon):
     
     #First check to see if the input requirement is met
     error = ValueError('List must contain nine numbers.')
-    #make sure they are all numbers
-    for i in lon:
-        if isinstance(i, int) or isinstance(i, float):
-            pass
-        else:
-            return error
-    #we obtain set list size requirement by determening size of matrix
     if len(lon) != (matrix_rows*matrix_cols):
-        return error
+        raise error
     
     
     #numpy array used to create and empty 3x3 matrix
@@ -73,7 +65,7 @@ def Calculate(lon):
         #flat
         flat_stats = function_dict[current_stat](matrix)
         #assign stats variables to the answer dictionary
-        stats[current_stat] = [col_stats,row_stats,flat_stats]
-        
+        stats[current_stat] = [col_stats.tolist(),row_stats.tolist(),flat_stats]
+    
     return(stats)      
 
